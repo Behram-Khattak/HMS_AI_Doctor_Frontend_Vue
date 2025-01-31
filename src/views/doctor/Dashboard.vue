@@ -3,6 +3,11 @@
       <navbar></navbar>
       <div style="margin-top: 5rem !important;" class="container mt-5">
         <h2>Doctor's Dashboard</h2>
+        <!-- AI chatbot doctor -->
+        <div class="ai-doctor-chatbot">
+          <AiDoctorChatbot class="h-[600px]" />
+        </div>
+        <!--  -->
         <div class="mb-3 d-flex align-items-center">
           <label for="appointmentDate" class="form-label w-25 text-dark">Select Date</label>
           <input v-model="selectedDate" type="date" class="form-control mx-2" id="appointmentDate" required>
@@ -70,7 +75,9 @@
   
   <script>
   import navbar from "@/components/Doctor/Header.vue";
+  import AiDoctorChatbot from "@/components/AiDoctorChatbot/AiDoctorChatbot.vue";
   import axios from "axios";
+import AiDoctorChatbot from "@/components/AiDoctorChatbot/AiDoctorChatbot.vue";
   export default {
     components: {
       navbar,

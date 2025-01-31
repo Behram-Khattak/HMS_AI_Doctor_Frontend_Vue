@@ -9,24 +9,14 @@
     <!-- Chat Messages Container -->
     <div class="flex-grow-1 overflow-auto p-3" ref="chatContainer">
       <!-- Bot Message -->
-      <div
-        v-for="(message, index) in messages"
-        :key="index"
-        class="d-flex"
-        :class="
-          message.sender === 'user'
-            ? 'justify-content-end'
-            : 'justify-content-start'
-        "
-      >
-        <div
-          :class="
-            message.sender === 'user'
-              ? 'bg-white text-dark border border-light'
-              : 'bg-light text-dark'
-          "
-          class="w-75 rounded p-3 shadow-sm mb-3"
-        >
+      <div v-for="(message, index) in messages" :key="index" class="d-flex" :class="message.sender === 'user'
+          ? 'justify-content-end'
+          : 'justify-content-start'
+        ">
+        <div :class="message.sender === 'user'
+            ? 'bg-white text-dark border border-light'
+            : 'bg-light text-dark'
+          " class="w-75 rounded p-3 shadow-sm mb-3">
           <p class="small mb-1">{{ message.text }}</p>
           <span class="text-muted small">{{ message.timestamp }}</span>
         </div>
@@ -47,13 +37,8 @@
     <!-- Chat Input Area -->
     <div class="border-top p-3 bg-white">
       <div class="d-flex gap-2">
-        <input
-          v-model="newMessage"
-          @keyup.enter="sendMessage"
-          type="text"
-          placeholder="Type your message here..."
-          class="form-control flex-grow-1 rounded"
-        />
+        <input v-model="newMessage" @keyup.enter="sendMessage" type="text" placeholder="Type your message here..."
+          class="form-control flex-grow-1 rounded" />
         <button @click="sendMessage" class="btn btn-primary px-4">Send</button>
 
         <!-- X-ray Upload Button (for future integration) -->
@@ -140,10 +125,12 @@ onMounted(() => {
 }
 
 @keyframes bounce {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-5px);
   }

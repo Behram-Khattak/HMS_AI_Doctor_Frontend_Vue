@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link>
       <router-link to="/registeredpatients">Registered</router-link>
     </nav> -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -18,10 +18,11 @@
   color: black;
   /* min-height: 100vh; */
 }
-body{
+body {
   background-color: #c4c4c4;
 }
-h2,h3{
+h2,
+h3 {
   font-weight: bolder;
 }
 nav {

@@ -7,16 +7,29 @@
     </div>
 
     <!-- Chat Messages Container -->
-    <div class="flex-grow-1 overflow-auto p-3" ref="chatContainer">
+    <div
+      class="flex-grow-1 overflow-auto p-3 chatBoxContainer"
+      ref="chatContainer"
+    >
       <!-- Bot Message -->
-      <div v-for="(message, index) in messages" :key="index" class="d-flex" :class="message.sender === 'user'
-          ? 'justify-content-end'
-          : 'justify-content-start'
-        ">
-        <div :class="message.sender === 'user'
-            ? 'bg-white text-dark border border-light'
-            : 'bg-light text-dark'
-          " class="w-75 rounded p-3 shadow-sm mb-3">
+      <div
+        v-for="(message, index) in messages"
+        :key="index"
+        class="d-flex"
+        :class="
+          message.sender === 'user'
+            ? 'justify-content-end'
+            : 'justify-content-start'
+        "
+      >
+        <div
+          :class="
+            message.sender === 'user'
+              ? 'bg-white text-dark border border-light'
+              : 'bg-light text-dark'
+          "
+          class="w-75 rounded p-3 shadow-sm mb-3"
+        >
           <p class="small mb-1">{{ message.text }}</p>
           <span class="text-muted small">{{ message.timestamp }}</span>
         </div>
@@ -37,14 +50,24 @@
     <!-- Chat Input Area -->
     <div class="border-top p-3 bg-white">
       <div class="d-flex gap-2">
-        <input v-model="newMessage" @keyup.enter="sendMessage" type="text" placeholder="Type your message here..."
-          class="form-control flex-grow-1 rounded" />
+        <input
+          v-model="newMessage"
+          @keyup.enter="sendMessage"
+          type="text"
+          placeholder="Type your message here..."
+          class="form-control flex-grow-1 rounded"
+        />
         <button @click="sendMessage" class="btn btn-primary px-4">Send</button>
 
-        <!-- X-ray Upload Button (for future integration) -->
-        <button class="btn btn-success px-3" title="Upload X-ray">
-          <i class="fas fa-upload"></i>
-        </button>
+        <!-- X-ray Upload Input (styled as button) -->
+        <label
+          class="btn btn-success px-3"
+          title="Upload X-ray"
+          for="xrayUpload"
+        >
+          <FontAwesomeIcon :icon="faUpload" />
+          <input type="file" id="xrayUpload" class="d-none" accept="image/*" />
+        </label>
       </div>
 
       <!-- Disclaimer -->
@@ -57,6 +80,9 @@
 </template>
 
 <script setup>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 import { ref, onMounted, nextTick } from "vue";
 
 const messages = ref([
@@ -75,17 +101,22 @@ const sendMessage = async () => {
   if (!newMessage.value.trim()) return;
 
   // Add user message
-  messages.value.push({
-    text: newMessage.value,
-    sender: "user",
-    timestamp: new Date().toLocaleTimeString(),
-  });
+  // messages.value.push({
+  //   text: newMessage.value,
+  //   sender: "user",
+  //   timestamp: new Date().toLocaleTimeString(),
+  // });
+  // app.post("/api/check-symptoms", async (req, res) => {
+  //   const symptoms = req.body.symptoms;
+  //   const diagnosis = await infermedicaAPI(symptoms);
+  //   res.json(diagnosis);
+  // });
 
   // Simulate bot response
   isTyping.value = true;
   newMessage.value = "";
 
-  // Scroll to bottom
+  // Scroll to bottom animation by vue js
   await nextTick();
   chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
 
@@ -110,6 +141,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.chatBoxContainer {
+  min-height: 50vh;
+  max-height: 60vh;
+}
 .dot {
   width: 8px;
   height: 8px;
@@ -125,7 +160,6 @@ onMounted(() => {
 }
 
 @keyframes bounce {
-
   0%,
   100% {
     transform: translateY(0);
